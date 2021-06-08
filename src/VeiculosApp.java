@@ -1,7 +1,5 @@
 
-import controle.CCarro;
-import controle.CCliente;
-import controle.CVendedor;
+import controle.*;
 import service.SVendedor;
 import util.Tools;
 
@@ -29,7 +27,8 @@ public class VeiculosApp {
         System.out.println(">  2 - LISTAR");
         System.out.println(">  3 - REMOVER");
         System.out.println(">  4 - VENDER");
-        System.out.println(">  5 - SAIR");
+        System.out.println(">  5 - SEGUROS");
+        System.out.println(">  6 - SAIR");
         System.out.println("------------------");
         System.out.println("Digite uma opção: ");
 
@@ -56,6 +55,8 @@ public class VeiculosApp {
                 vender();
                 break;
             case 5:
+                seguros();
+            case 6:
                 System.out.println("Até mais !");
                 Tools.pausar(2);
                 System.exit(0);
@@ -65,6 +66,64 @@ public class VeiculosApp {
                 break;
 
         }
+    }
+
+    private static void seguros() {
+        System.out.println();
+        System.out.println("'''''''''''''");
+        System.out.println("'  SEGUROS  '");
+        System.out.println("'''''''''''''");
+        System.out.println();
+        System.out.println(".: Selecione uma opção :.");
+        System.out.println(">  1 - CADASTRAR");
+        System.out.println(">  2 - LISTAR");
+        System.out.println(">  3 - REMOVER");
+        System.out.println(">  4 - VOLTAR");
+        try{
+            opcao = Integer.parseInt(tecla.nextLine());
+        }catch (InputMismatchException e){
+            menu();
+        }catch (NumberFormatException f){
+            menu();
+        }
+
+        switch (opcao){
+            case 1:
+                cadseguros();
+                break;
+            case 2:
+                CSeguro.getInstance().listar();
+                menu();
+                break;
+            case 3:
+                removerseguros();
+                break;
+            case 4:
+                menu();
+            default:
+                System.out.println("Opção inválida");
+                seguros();
+                break;
+
+        }
+    }
+
+    private static void removerseguros() {
+        System.out.println();
+        CSeguro.getInstance().listar();
+        System.out.println("Digite o codigo do Seguro de que deseja remover");
+        campo = Integer.parseInt(tecla.nextLine());
+        CSeguro.getInstance().remover(campo);
+        System.out.println();
+        menu();
+    }
+
+    private static void cadseguros() {
+        System.out.println();
+        System.out.println("Digite o nome ou tipo do seguro");
+        nome = tecla.nextLine();
+        CSeguro.getInstance().cadastrar(nome);
+        menu();
     }
 
     public static void head(){
@@ -80,7 +139,8 @@ public class VeiculosApp {
         System.out.println(">  1 - Cliente");
         System.out.println(">  2 - Vendedor");
         System.out.println(">  3 - Carro");
-        System.out.println(">  4 - Voltar");
+        System.out.println(">  4 - Pagamento");
+        System.out.println(">  5 - Voltar");
         System.out.println("------------------");
         System.out.println("Digite uma opção: ");
 
@@ -104,6 +164,9 @@ public class VeiculosApp {
                 cadcarro();
                 break;
             case 4:
+                cadpagamento();
+                break;
+            case 5:
                 menu();
                 break;
             default:
@@ -115,6 +178,14 @@ public class VeiculosApp {
         }
     }
 
+    private static void cadpagamento() {
+        System.out.println();
+        System.out.println("Digite a forma de pagamento");
+        nome = tecla.nextLine();
+        CPagamento.getInstance().cadastrar(nome);
+        menu();
+    }
+
     public static void listar(){
         System.out.println(" O que deseja LISTAR ?");
         System.out.println(">  1 - Cliente");
@@ -123,6 +194,7 @@ public class VeiculosApp {
         System.out.println(">  4 - Voltar");
         System.out.println(">  5 - Atualizar cadastro");
         System.out.println(">  6 - Busca unica");
+        System.out.println(">  7 - Pagamentos");
         System.out.println("------------------");
         System.out.println("Digite uma opção: ");
 
@@ -156,6 +228,10 @@ public class VeiculosApp {
                 break;
             case 6:
                 buscaUnica();
+                break;
+            case 7:
+                CPagamento.getInstance().listar();
+                menu();
                 break;
             default:
                 System.out.println("Opção inválida");
@@ -344,7 +420,8 @@ public class VeiculosApp {
         System.out.println(">  1 - Cliente");
         System.out.println(">  2 - Vendedor");
         System.out.println(">  3 - Carro");
-        System.out.println(">  4 - Voltar");
+        System.out.println(">  4 - Pagamento");
+        System.out.println(">  5 - Voltar");
         System.out.println("------------------");
         System.out.println("Digite uma opção: ");
 
@@ -368,6 +445,9 @@ public class VeiculosApp {
                 removecarro();
                 break;
             case 4:
+                removerpagamento();
+                break;
+            case 5:
                 menu();
                 break;
             default:
@@ -377,6 +457,15 @@ public class VeiculosApp {
                 break;
 
         }
+    }
+
+    private static void removerpagamento() {
+        System.out.println();
+        CPagamento.getInstance().listar();
+        System.out.println("Informe o codigo do pagamento que deseja remover: ");
+        campo = Integer.parseInt(tecla.nextLine());
+        CPagamento.getInstance().remover(campo);
+        menu();
     }
 
     private static void removecarro() {

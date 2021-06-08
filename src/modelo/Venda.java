@@ -3,13 +3,24 @@ package modelo;
 public class Venda {
 
     private int id;
-    private String data;
     private Carro carro;
     private Seguro seguro;
     private Vendedor vendedor;
     private Cliente cliente;
     private Pagamento pagamento;
 
+    public Venda(){}
+
+    public Venda(int id, Carro carro, Seguro seguro, Vendedor vendedor, Cliente cliente, Pagamento pagamento){
+        this.id = id;
+        this.carro = carro;
+        this.seguro = seguro;
+        this.vendedor = vendedor;
+        this.cliente = cliente;
+        this.pagamento = pagamento;
+
+
+    }
 
     public int getId() {
         return id;
@@ -19,48 +30,40 @@ public class Venda {
         this.id = id;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public Carro getCarro() {
-        return carro;
+    public int getCarro() {
+        return carro.getId();
     }
 
     public void setCarro(Carro carro) {
         this.carro = carro;
     }
 
-    public Seguro getSeguro() {
-        return seguro;
+    public int getSeguro() {
+        return seguro.getId();
     }
 
     public void setSeguro(Seguro seguro) {
         this.seguro = seguro;
     }
 
-    public Vendedor getVendedor() {
-        return vendedor;
+    public int getVendedor() {
+        return vendedor.getId();
     }
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getCliente() {
+        return cliente.getId();
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
+    public int getPagamento() {
+        return pagamento.getId();
     }
 
     public void setPagamento(Pagamento pagamento) {

@@ -1,31 +1,24 @@
 package controle;
 
 import modelo.Venda;
-import repositorio.IVenda;
+import service.SVenda;
 
-public abstract class CVenda implements IVenda {
-    @Override
-    public void cadastrar(Venda venda) {
 
+public class CVenda {
+
+    private static CVenda cVenda;
+    private SVenda sVenda = SVenda.getInstance();
+
+    private CVenda(){};
+
+    public static CVenda getInstance(){
+        if(cVenda == null){
+            cVenda = new CVenda();
+        }
+        return cVenda;
     }
 
-    @Override
-    public void atualizar(Venda venda) {
-
-    }
-
-    @Override
-    public void remover(int id) {
-
-    }
-
-    @Override
-    public boolean existe(int id) {
-        return false;
-    }
-
-    @Override
-    public void listar() {
-
+    public void cadastrar(){
+        Venda venda = new Venda();
     }
 }

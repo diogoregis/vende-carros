@@ -2,12 +2,12 @@ package repositorio;
 
 import modelo.Pagamento;
 
+import java.util.List;
+
 public interface IPagamento {
 
-    public void cadastrar(Pagamento pagamento);
-    public void atualizar(Pagamento pagamento);
-    public void remover(int id);
-    public boolean existe(int id);
-    public void listar();
+    public boolean cadastrar(Pagamento pagamento);
+    public boolean remover(int id);
+    public List<Pagamento> listar();
 
 }

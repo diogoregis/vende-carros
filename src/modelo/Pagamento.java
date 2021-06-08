@@ -5,6 +5,13 @@ public class Pagamento {
     private int id;
     private String tipo;
 
+    public Pagamento(){}
+
+    public Pagamento(int id, String tipo){
+        this.id = id;
+        this.tipo = tipo;
+    }
+
     public int getId() {
         return id;
     }

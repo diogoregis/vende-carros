@@ -4,6 +4,15 @@ public class Seguro {
     private int id;
     private String tipo;
 
+    public Seguro(){
+
+    }
+
+    public Seguro(int id, String tipo){
+        this.id = id;
+        this.tipo = tipo;
+    }
+
     public int getId() {
         return id;
     }
