@@ -69,7 +69,6 @@ public class ClienteDAO implements ICliente {
 
     }
 
-
     @Override
     public boolean remover(int id) {
         Conexao.getInstance();

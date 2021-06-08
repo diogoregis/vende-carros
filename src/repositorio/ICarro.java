@@ -2,12 +2,13 @@ package repositorio;
 
 import modelo.Carro;
 
+import java.util.List;
+
 public interface ICarro {
 
-    public void cadastrar(Carro carro);
-    public void atualizar(Carro carro);
-    public void remover(int id);
-    public boolean existe(int id);
-    public void listar();
-
+    public boolean cadastrar(Carro carro);
+    public boolean atualizar(Carro carro);
+    public boolean remover(int id);
+    public Carro buscaUnica(int id);
+    public List<Carro> listar();
 }

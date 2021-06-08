@@ -1,5 +1,7 @@
 
 import controle.CCliente;
+import controle.CVendedor;
+import service.SVendedor;
 import util.Tools;
 
 import java.util.InputMismatchException;
@@ -9,7 +11,7 @@ public class VeiculosApp {
 
     private static Scanner tecla = new Scanner(System.in);
     private static int opcao, campo;
-    private static String nomecliente, fonecliente, emailcliente;
+    private static String nome, fonecliente, emailcliente;
     private static float valor;
 
 
@@ -138,7 +140,8 @@ public class VeiculosApp {
                 menu();
                 break;
             case 2:
-                cadvendedor();
+                CVendedor.getInstance().listar();
+                menu();
                 break;
             case 3:
                 cadcarro();
@@ -150,7 +153,7 @@ public class VeiculosApp {
                 atualizar();
                 break;
             case 6:
-                buscaUnicaCliente();
+                buscaUnica();
                 break;
             default:
                 System.out.println("Opção inválida");
@@ -160,6 +163,56 @@ public class VeiculosApp {
                 break;
 
         }
+    }
+
+    private static void buscaUnica() {
+
+        System.out.println(" O que deseja LISTAR ?");
+        System.out.println(">  1 - Cliente");
+        System.out.println(">  2 - Vendedor");
+        System.out.println(">  3 - Carro");
+        System.out.println(">  4 - Voltar");
+        System.out.println("------------------");
+        System.out.println("Digite uma opção: ");
+
+        try{
+            opcao = Integer.parseInt(tecla.nextLine());
+        }catch (InputMismatchException e){
+            menu();
+        }catch (NumberFormatException f){
+            menu();
+        }
+
+
+        switch (opcao){
+            case 1:
+                buscaUnicaCliente();
+                break;
+            case 2:
+                buscaUnicaVendedor();
+                break;
+            case 3:
+                cadcarro();
+                break;
+            case 4:
+                menu();
+                break;
+            default:
+                System.out.println("Opção inválida");
+                System.out.println("Tente novamente");
+                Tools.pausar(1);
+                buscaUnica();
+                break;
+
+        }
+    }
+
+    private static void buscaUnicaVendedor() {
+        System.out.println();
+        System.out.println("Informe o codigo id - do vendedor");
+        campo = Integer.parseInt(tecla.nextLine());
+        CVendedor.getInstance().buscaUnica(campo);
+        menu();
     }
 
     private static void buscaUnicaCliente() {
@@ -198,10 +251,9 @@ public class VeiculosApp {
         switch (opcao){
             case 1:
                 atualizacliente();
-                menu();
                 break;
             case 2:
-                cadvendedor();
+                atualizavendedor();
                 break;
             case 3:
                 cadcarro();
@@ -222,6 +274,17 @@ public class VeiculosApp {
         }
     }
 
+    private static void atualizavendedor() {
+        System.out.println();
+        CVendedor.getInstance().listar();
+        System.out.println("Informe o codigo do vendedor que deseja atualizar.");
+        campo = Integer.parseInt(tecla.nextLine());
+        System.out.println("Informe o novo nome");
+        nome = tecla.nextLine();
+        CVendedor.getInstance().atualizar(campo, nome);
+        menu();
+    }
+
     private static void atualizacliente() {
         CCliente.getInstance().listar();
         System.out.println();
@@ -230,13 +293,13 @@ public class VeiculosApp {
         System.out.println();
         System.out.println("Certo");
         System.out.println("Digite o nome");
-        nomecliente = tecla.nextLine();
+        nome = tecla.nextLine();
         System.out.println("Digite o telefone com DDD - (somente numeros)");
         fonecliente = tecla.nextLine();
         System.out.println("Digite o email");
         emailcliente = tecla.nextLine();
         System.out.println();
-        CCliente.getInstance().atualizar(campo, nomecliente, fonecliente, emailcliente);
+        CCliente.getInstance().atualizar(campo, nome, fonecliente, emailcliente);
         System.out.println();
 
     }
@@ -289,6 +352,13 @@ public class VeiculosApp {
     }
 
     private static void removevendedor() {
+        System.out.println();
+        CVendedor.getInstance().listar();
+        System.out.println();
+        System.out.println("Digite o codigo do vendedor que deseja remover");
+        campo = Integer.parseInt(tecla.nextLine());
+        CVendedor.getInstance().remover(campo);
+        menu();
     }
 
     private static void removecliente() {
@@ -319,12 +389,12 @@ public class VeiculosApp {
 
         headcadastrar();
         System.out.println("Digite o nome do Cliente: ");
-        nomecliente = tecla.nextLine();
+        nome = tecla.nextLine();
         System.out.println("Digite o telefone do Cleinte, com DDD - (somente numeros): ");
         fonecliente = tecla.nextLine();
         System.out.println("Digite o email do Cliente: ");
         emailcliente = tecla.nextLine();
-        CCliente.getInstance().cadastrar(nomecliente, fonecliente, emailcliente);
+        CCliente.getInstance().cadastrar(nome, fonecliente, emailcliente);
         Tools.pausar(1);
         menu();
 
@@ -333,10 +403,13 @@ public class VeiculosApp {
     }
 
     public static void cadvendedor(){
-        System.out.println("Informe os dados que se pedem: ");
+        headcadastrar();
+        System.out.println();
         System.out.print("Digite o nome do vendedor: ");
-        // TUDO
-
+        nome = tecla.nextLine();
+        CVendedor.getInstance().cadastrar(nome);
+        Tools.pausar(1);
+        menu();
     }
 
     public static void cadcarro(){
