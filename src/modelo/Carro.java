@@ -9,6 +9,19 @@ public class Carro {
     private float preco;
     private String ano;
 
+    public Carro(){
+
+    }
+
+    public Carro(int id, String marca, String modelo, String cor, float preco, String ano){
+        this.id = id;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.preco = preco;
+        this.ano = ano;
+    }
+
     public int getId() {
         return id;
     }

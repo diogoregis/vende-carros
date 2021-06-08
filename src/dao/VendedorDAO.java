@@ -25,8 +25,6 @@ public class VendedorDAO implements IVendedor {
         return vendedorDAO;
     }
 
-
-
     @Override
     public boolean cadastrar(Vendedor vendedor) {
         Conexao.getInstance();

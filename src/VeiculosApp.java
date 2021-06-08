@@ -1,4 +1,5 @@
 
+import controle.CCarro;
 import controle.CCliente;
 import controle.CVendedor;
 import service.SVendedor;
@@ -11,8 +12,8 @@ public class VeiculosApp {
 
     private static Scanner tecla = new Scanner(System.in);
     private static int opcao, campo;
-    private static String nome, fonecliente, emailcliente;
-    private static float valor;
+    private static String nome, fonecliente, emailcliente, marca, modelo, cor, ano;
+    private static float preco;
 
 
     public static void main(String[] args) {
@@ -144,7 +145,8 @@ public class VeiculosApp {
                 menu();
                 break;
             case 3:
-                cadcarro();
+                CCarro.getInstance().listar();
+                menu();
                 break;
             case 4:
                 menu();
@@ -164,6 +166,7 @@ public class VeiculosApp {
 
         }
     }
+
 
     private static void buscaUnica() {
 
@@ -192,7 +195,7 @@ public class VeiculosApp {
                 buscaUnicaVendedor();
                 break;
             case 3:
-                cadcarro();
+                buscaUnicaCarro();
                 break;
             case 4:
                 menu();
@@ -205,6 +208,14 @@ public class VeiculosApp {
                 break;
 
         }
+    }
+
+    private static void buscaUnicaCarro() {
+        System.out.println();
+        System.out.println("informe o codigo id do carro: ");
+        campo = Integer.parseInt(tecla.nextLine());
+        CCarro.getInstance().buscaUnica(campo);
+        menu();
     }
 
     private static void buscaUnicaVendedor() {
@@ -256,7 +267,7 @@ public class VeiculosApp {
                 atualizavendedor();
                 break;
             case 3:
-                cadcarro();
+                atualizaCarro();
                 break;
             case 4:
                 menu();
@@ -272,6 +283,26 @@ public class VeiculosApp {
                 break;
 
         }
+    }
+
+    private static void atualizaCarro() {
+        System.out.println();
+        CCarro.getInstance().listar();
+        System.out.println("Informe o codigo do carro que deseja alterar: ");
+        campo = Integer.parseInt(tecla.nextLine());
+        System.out.println("Informe a marca:");
+        marca = tecla.nextLine();
+        System.out.println("Informe o modelo");
+        modelo = tecla.nextLine();
+        System.out.println("Informe a cor");
+        cor = tecla.nextLine();
+        System.out.println("Informe o ano");
+        ano = tecla.nextLine();
+        System.out.println("Informe o preço");
+        preco = Float.parseFloat(tecla.nextLine());
+        CCarro.getInstance().atualizar(campo, marca, modelo, cor, preco, ano);
+        menu();
+
     }
 
     private static void atualizavendedor() {
@@ -349,6 +380,12 @@ public class VeiculosApp {
     }
 
     private static void removecarro() {
+        System.out.println();
+        CCarro.getInstance().listar();
+        System.out.println("Informe o codigo do carro que deseja remover: ");
+        campo = Integer.parseInt(tecla.nextLine());
+        CCarro.getInstance().remover(campo);
+        menu();
     }
 
     private static void removevendedor() {
@@ -413,7 +450,19 @@ public class VeiculosApp {
     }
 
     public static void cadcarro(){
-        // TUDO
+        headcadastrar();
+        System.out.println("Informe a marca do carro:");
+        marca = tecla.nextLine();
+        System.out.println("Informe o modelo do carro");
+        modelo = tecla.nextLine();
+        System.out.println("Informe a cor do carro");
+        cor = tecla.nextLine();
+        System.out.println("Informe o ano do carro");
+        ano = tecla.nextLine();
+        System.out.println("Informe o preço de venda do carro");
+        preco = Float.parseFloat(tecla.nextLine());
+        CCarro.getInstance().cadastrar(marca, modelo, cor, preco, ano);
+        menu();
     }
 
     public static void headcadastrar(){
